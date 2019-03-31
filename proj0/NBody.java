@@ -51,6 +51,7 @@ public class NBody {
     double[] xForces = new double[planets.length];
     double[] yForces = new double[planets.length];
     while (time < T) {
+      time += dt;
       /* Clears the drawing window. */
   		StdDraw.clear();
       /* Stamps three copies of advice.png in a triangular pattern. */
