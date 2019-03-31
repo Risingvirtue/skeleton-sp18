@@ -44,11 +44,31 @@ public class Planet {
     return (f1 * dx) / (r);
   }
 
+  public double calcNetForceExertedByX(Planet[] planets) {
+    double xxF = 0;
+    for (int i = 0; i < planets.length; i++) {
+      if (!this.equals(planets[i])) {
+        xxF += calcForceExertedByX(planets[i]);
+      }
+    }
+    return xxF;
+  }
+
   public double calcForceExertedByY(Planet p) {
     final double dy = p.yyPos - yyPos;
     final double r = calcDistance(p);
     final double f1 = calcForceExertedBy(p);
     return (f1 * dy) / (r);
+  }
+
+  public double calcNetForceExertedByY(Planet[] planets) {
+    double yyF = 0;
+    for (int i = 0; i < planets.length; i++) {
+      if (!this.equals(planets[i])) {
+        yyF += calcForceExertedByY(planets[i]);
+      }
+    }
+    return yyF;
   }
 
   public void draw() {
