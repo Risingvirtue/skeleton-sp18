@@ -23,7 +23,6 @@ public class Planet {
     yyVel = p.yyVel;
     mass = p.mass;
     imgFileName = p.imgFileName;
-
   }
 
   public double calcDistance(Planet p) {
@@ -50,6 +49,10 @@ public class Planet {
     final double r = calcDistance(p);
     final double f1 = calcForceExertedBy(p);
     return (f1 * dy) / (r);
+  }
+
+  public void draw() {
+		StdDraw.picture(xxPos, yyPos, "/images/" + imgFileName);
   }
 
   public void update(double dt, double xxF, double yyF) {
