@@ -1,15 +1,15 @@
-public class ArrayDeque<Item> {
-    private Item[] arr;
+public class ArrayDeque<T> {
+    private T[] arr;
     private int head;
     private int size;
     public ArrayDeque() {
-        arr = (Item[]) new Object[8];
+        arr = (T[]) new Object[8];
         head = 0;
         size = 0;
     }
 
     /** Adds an item to the front of the Deque. */
-    public void addFirst(Item x) {
+    public void addFirst(T x) {
         if (size == arr.length) {
             resize(size * 2);
         }
@@ -19,7 +19,7 @@ public class ArrayDeque<Item> {
         size++;
     }
     /** Adds an item to the back of the Deque. */
-    public void addLast(Item x) {
+    public void addLast(T x) {
         if (size == arr.length) {
             resize(size * 2);
         }
@@ -33,9 +33,9 @@ public class ArrayDeque<Item> {
         return size == 0;
     }
 
-    public void resize(int newSize) {
-        System.out.println("resizing");
-        Item[] newArr = (Item[]) new Object[newSize];
+    private void resize(int newSize) {
+
+        T[] newArr = (T[]) new Object[newSize];
         int numLeft = Math.min(size, arr.length - head);
         System.arraycopy(arr, head, newArr, 0, numLeft);
         if (numLeft < size) {
@@ -62,7 +62,7 @@ public class ArrayDeque<Item> {
         System.out.println(sb);
     }
 
-    public void handleHead(int increment)  {
+    private void handleHead(int increment)  {
         head += increment;
         if (head < 0) {
             head += arr.length;
@@ -73,7 +73,7 @@ public class ArrayDeque<Item> {
 
     /** Removes and returns the item at the front of the Deque.
      * If no such item exists, returns null. */
-    public Item removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
@@ -82,7 +82,7 @@ public class ArrayDeque<Item> {
             resize(arr.length / 2);
         }
 
-        Item first = get(0);
+        T first = get(0);
 
         arr[head] = null;
 
@@ -94,7 +94,7 @@ public class ArrayDeque<Item> {
 
     /** Removes and returns the item at the back of the Deque.
      * If no such item exists, returns null. */
-    public Item removeLast() {
+    public T removeLast() {
 
         if (size == 0) {
             return null;
@@ -104,7 +104,7 @@ public class ArrayDeque<Item> {
         }
 
         int lastNum = (head + size - 1) % arr.length;
-        Item last = get(size - 1);
+        T last = get(size - 1);
         arr[lastNum] = null;
         size--;
         return last;
@@ -113,13 +113,9 @@ public class ArrayDeque<Item> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      * If no such item exists, returns null. Must not alter the deque
      */
-    public Item get(int index) {
+    public T get(int index) {
         int newIndex = (index + head) % arr.length;
 
         return arr[newIndex];
-    }
-
-    public int getHead() {
-        return head;
     }
 }
