@@ -1,18 +1,20 @@
 public class LinkedListDeque<T> {
-    public class ListNode {
 
+
+    private int size;
+    private ListNode sentinel;
+
+    private class ListNode {
         T item;
         ListNode prev;
         ListNode next;
-        ListNode(ListNode prev, T x, ListNode next) {
-            this.prev = prev;
+        private ListNode(ListNode previous, T x, ListNode n) {
+            prev = previous;
             item = x;
-            this.next = next;
+            next = n;
         }
     }
-
-    int size;
-    ListNode sentinel;
+    
     public LinkedListDeque() {
         size = 0;
         sentinel = new ListNode(null, null, null);
