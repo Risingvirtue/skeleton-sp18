@@ -1,7 +1,7 @@
 public class ArrayDeque<Item> {
-    Item[] arr;
-    int head;
-    int size;
+    private Item[] arr;
+    private int head;
+    private int size;
     public ArrayDeque() {
         arr = (Item[]) new Object[8];
         head = 0;
@@ -13,7 +13,7 @@ public class ArrayDeque<Item> {
         if (size == arr.length) {
             resize(size * 2);
         }
-        handleHead(head, -1);
+        handleHead(-1);
 
         arr[head] = x;
         size++;
@@ -34,8 +34,9 @@ public class ArrayDeque<Item> {
     }
 
     public void resize(int newSize) {
+
         Item[] newArr = (Item[]) new Object[newSize];
-        int numLeft = arr.length - head;
+        int numLeft = Math.min(size, arr.length - head);
         System.arraycopy(arr, head, newArr, 0, numLeft);
         if (numLeft < size) {
             System.arraycopy(arr, 0, newArr, numLeft, size - numLeft);
@@ -61,15 +62,13 @@ public class ArrayDeque<Item> {
         System.out.println(sb);
     }
 
-    public void handleHead(int head, int increment)  {
+    public void handleHead(int increment)  {
         head += increment;
         if (head < 0) {
             head += arr.length;
         } else if (head >= arr.length) {
             head -= arr.length;
         }
-
-        this.head = head;
     }
 
     /** Removes and returns the item at the front of the Deque. If no such item exists, returns null. */
@@ -78,14 +77,14 @@ public class ArrayDeque<Item> {
             return null;
         }
         if (size * 4 < arr.length) {
-            resize(size / 2);
+            resize(arr.length / 2);
         }
 
         Item first = get(0);
 
         arr[head] = null;
 
-        handleHead(head, 1);
+        handleHead(1);
 
         size--;
         return first;
@@ -93,12 +92,16 @@ public class ArrayDeque<Item> {
 
     /** Removes and returns the item at the back of the Deque. If no such item exists, returns null. */
     public Item removeLast() {
+
         if (size == 0) {
             return null;
         }
         if (size * 4 < arr.length) {
-            resize(size / 2);
+
+            resize(arr.length / 2);
+
         }
+
         int lastNum = (head + size) % arr.length;
         Item last = get(size - 1);
         arr[lastNum] = null;

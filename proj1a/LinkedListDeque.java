@@ -1,10 +1,10 @@
-public class LinkedListDeque<Item> {
+public class LinkedListDeque<T> {
     public class ListNode {
 
-        Item item;
+        T item;
         ListNode prev;
         ListNode next;
-        ListNode(ListNode prev, Item x, ListNode next) {
+        ListNode(ListNode prev, T x, ListNode next) {
             this.prev = prev;
             item = x;
             this.next = next;
@@ -21,13 +21,13 @@ public class LinkedListDeque<Item> {
     }
 
     /** Adds an item to the front of the Deque. */
-    public void addFirst(Item x) {
+    public void addFirst(T x) {
         ListNode insert = new ListNode(sentinel, x, sentinel.next);
         sentinel.next = insert;
         size++;
     }
     /** Adds an item to the back of the Deque. */
-    public void addLast(Item x) {
+    public void addLast(T x) {
         ListNode insert = new ListNode(sentinel.prev, x, sentinel);
         sentinel.prev = insert;
         size++;
@@ -56,21 +56,23 @@ public class LinkedListDeque<Item> {
         System.out.println(sb);
     }
 
-    /** Removes and returns the item at the front of the Deque. If no such item exists, returns null. */
-    public Item removeFirst() {
+    /** Removes and returns the item at the front of the Deque.
+     * If no such item exists, returns null. */
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
         ListNode removedNode = sentinel.next;
-        Item firstItem = removedNode.item;
+        T firstItem = removedNode.item;
         sentinel.next = removedNode.next;
         sentinel.next.prev = sentinel;
         size--;
         return firstItem;
     }
 
-    /** Removes and returns the item at the back of the Deque. If no such item exists, returns null. */
-    public Item removeLast() {
+    /** Removes and returns the item at the back of the Deque.
+     * If no such item exists, returns null. */
+    public T removeLast() {
 
         return sentinel.item;
     }
@@ -78,7 +80,7 @@ public class LinkedListDeque<Item> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
      * If no such item exists, returns null. Must not alter the deque
      */
-    public Item get(int index) {
+    public T get(int index) {
         return sentinel.item;
     }
 }
