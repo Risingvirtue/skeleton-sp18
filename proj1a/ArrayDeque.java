@@ -34,7 +34,7 @@ public class ArrayDeque<Item> {
     }
 
     public void resize(int newSize) {
-
+        System.out.println("resizing");
         Item[] newArr = (Item[]) new Object[newSize];
         int numLeft = Math.min(size, arr.length - head);
         System.arraycopy(arr, head, newArr, 0, numLeft);
@@ -71,11 +71,13 @@ public class ArrayDeque<Item> {
         }
     }
 
-    /** Removes and returns the item at the front of the Deque. If no such item exists, returns null. */
+    /** Removes and returns the item at the front of the Deque.
+     * If no such item exists, returns null. */
     public Item removeFirst() {
         if (size == 0) {
             return null;
         }
+
         if (size * 4 < arr.length) {
             resize(arr.length / 2);
         }
@@ -90,19 +92,18 @@ public class ArrayDeque<Item> {
         return first;
     }
 
-    /** Removes and returns the item at the back of the Deque. If no such item exists, returns null. */
+    /** Removes and returns the item at the back of the Deque.
+     * If no such item exists, returns null. */
     public Item removeLast() {
 
         if (size == 0) {
             return null;
         }
         if (size * 4 < arr.length) {
-
             resize(arr.length / 2);
-
         }
 
-        int lastNum = (head + size) % arr.length;
+        int lastNum = (head + size - 1) % arr.length;
         Item last = get(size - 1);
         arr[lastNum] = null;
         size--;
@@ -116,5 +117,9 @@ public class ArrayDeque<Item> {
         int newIndex = (index + head) % arr.length;
 
         return arr[newIndex];
+    }
+
+    public int getHead() {
+        return head;
     }
 }
